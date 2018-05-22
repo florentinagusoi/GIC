@@ -2,15 +2,13 @@
 #include <fstream>
 #include <string.h>
 using namespace std;
-int stare_init, stari_fin[10];
 char cuvant[100];
 
-ifstream f("gramatica");
 struct tranzitie {
     char litera;
     char stare[20];
 } tranz[20];
-void inserare(char cuv[100],int poz,char subsir[20])
+void inserare_sir(char cuv[100],int poz,char subsir[20])
 {
     char sir[100];
     sir[0]=NULL;
@@ -32,7 +30,7 @@ void inserare(char cuv[100],int poz,char subsir[20])
     }
 }
 
-void GIC(char cuv[100], int lung_tranz,int &OK) {
+void GIC(char cuv[100], int total_tranzitii,int &OK) {
     int i,poz=-1; char lit_mare;
     char copiecuv[100];
     for(i=0;i<strlen(cuv);i++)
@@ -45,22 +43,23 @@ void GIC(char cuv[100], int lung_tranz,int &OK) {
      OK=1;
     else
     {
-    for (i = 0; i < lung_tranz; i++)
+    for (i = 0; i < total_tranzitii; i++)
         if (tranz[i].litera == lit_mare && strlen(cuv)<=strlen(cuvant)+1)
         {
               strcpy(copiecuv,cuv);
               if(strcmp(tranz[i].stare,"#")!=0)
-            inserare(copiecuv,poz,tranz[i].stare);
+            inserare_sir(copiecuv,poz,tranz[i].stare);
             else strcpy(copiecuv+poz,copiecuv+poz+1);
-            GIC(copiecuv,lung_tranz,OK);
+            GIC(copiecuv,total_tranzitii,OK);
         }
     }
 }
 int main() {
-    int lung_tranz, nrfin;
+    int total_tranzitii, nrfin;
     int i, OK = 0;
-    f >> lung_tranz;
-    for (i = 0; i < lung_tranz; i++) {
+    ifstream f("gramatica");
+    f >> total_tranzitii;
+    for (i = 0; i < total_tranzitii; i++) {
         f>>tranz[i].litera;
         f.get();
         f>>tranz[i].stare;
@@ -73,7 +72,7 @@ int main() {
     cin >> cuvant;
 
     cout << endl;
-    GIC(cuv,lung_tranz,OK);
+    GIC(cuv,total_tranzitii,OK);
     if(OK==0)
         cout<<"cuvant neacceptat";
     else
