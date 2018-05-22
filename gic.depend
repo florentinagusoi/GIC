@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1526986385 source:c:\users\flori\desktop\tema3_lfa\gic\main.cpp
+	<iostream>
+	<fstream>
+	<string.h>
+
