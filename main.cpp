@@ -8,7 +8,15 @@ struct tranzitie {
     char litera;
     char stare[20];
 } tranz[20];
-void inserare_sir(char cuv[100],int poz,char subsir[20])
+
+/**
+*
+* @param cuvant reprezinta cuvantul din gramatica la pasul actual
+* @param poz reprezinta pozitia pe care este pusa litera mare
+* @param sub reprezinta subsirul cu care inlocuiesc litera mare
+*/
+
+void inserare_sir(char cuv[100],int poz,char sub[20])
 {
     char sir[100];
     sir[0]=NULL;
@@ -24,11 +32,20 @@ void inserare_sir(char cuv[100],int poz,char subsir[20])
     for(i=0;i<poz;i++)
         sir[i]=cuv[i];
         sir[poz]=NULL;
-        strcat(sir,subsir);
+        strcat(sir,sub);
         strcat(sir,cuv+poz+1);
         strcpy(cuv,sir);
     }
 }
+
+
+/**
+*
+* @param cuv reprezinta cuvantul actualizat la fiecare pas de subprogram 
+* inlocuind in el cu subprogramul inserare_sir
+* @param total_tranzitii sunt numarul total de tranzitii al gramaticii
+* @param OK contine daca este cuvantul acceptat sau nu
+*/
 
 void GIC(char cuv[100], int total_tranzitii,int &OK) {
     int i,poz=-1; char lit_mare;
