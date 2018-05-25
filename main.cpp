@@ -23,7 +23,7 @@ void inserare_sir(char cuv[100],int poz,char sub[20])
     int i;
     if(poz==0)
     {
-        strcpy(sir,subsir);
+        strcpy(sir,sub);
         strcat(sir,cuv+1);
         strcpy(cuv,sir);
     }
